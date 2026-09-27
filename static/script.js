@@ -47,13 +47,13 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             const data = await response.json();
             if (data.error) {
-                output.textContent = 'Error: ' + data.error;
+                output.innerHTML = marked.parse('**Error:** ' + data.error);
             } else {
-                output.textContent = data.answer || data.quiz;
+                output.innerHTML = marked.parse(data.answer || data.quiz || '');
             }
             resultSection.style.display = 'block';
         } catch (error) {
-            output.textContent = 'An error occurred: ' + error.message;
+            output.innerHTML = marked.parse('**Error:** ' + error.message);
             resultSection.style.display = 'block';
         } finally {
             loadingDiv.style.display = 'none';
